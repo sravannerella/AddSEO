@@ -1,0 +1,26 @@
+{
+  "name": "adseo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -w . -e html,js -- index.js"
+  },
+  "keywords": [
+    "adwords",
+    "adseo",
+    "adwords",
+    "google",
+    "ads",
+    "products",
+    "relations"
+  ],
+  "author": "Sravan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "request": "^2.81.0",
+    "vis": "^4.19.1"
+  }
+}

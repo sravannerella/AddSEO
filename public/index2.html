@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AdSEO</title>
+	<script type="text/javascript" src="vis/dist/vis.js"></script>
+	<link rel="stylesheet" type="text/css" href="vis/dist/vis.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="test.js"></script>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	
+	<input type="text" class="search" id="search" placeholder="Search...">
+	<!-- <button class="button button1" onclick="search()">GO</button> -->
+	<button class="button button1">GO</button>
+	
+	<!-- <script>
+		function search() {
+			var value = document.getElementById("search").value;
+			console.log(value);
+			fetchData(value);
+		}
+
+		function fetchData(value) {
+			var url = "http://luke.deentaylor.com/wikipedia/api/links?page=" + value;
+			var xhttp = new XMLHttpRequest();
+		    xhttp.open("GET", url, true);
+		    console.log(url);
+		    xhttp.setRequestHeader("Content-type", "application/json");
+		    xhttp.send();
+		    var response = xhttp.responseText;
+		    console.log(response);
+		}
+	</script> -->
+	
+	<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				var value = $(".search").val();
+				console.log(value);
+				var url = "http://luke.deentaylor.com/wikipedia/api/links?page=" + value;
+				$.ajax({
+					type: "GET",
+					url: url,
+					dataType: "jsonp",
+					crossDomain: true,
+					headers: { 'Access-Control-Allow-Origin': '*' },
+					success: function(response){
+						console.log(response);
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+		                console.log('jqXHR:');
+		                console.log(jqXHR);
+		                console.log('textStatus:');
+		                console.log(textStatus);
+		                console.log('errorThrown:');
+		                console.log(errorThrown);
+					},
+					complete: function(response){
+						console.log(response);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

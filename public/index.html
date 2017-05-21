@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AdSEO</title>
+	<script type="text/javascript" src="vis/dist/vis.js"></script>
+	<link rel="stylesheet" type="text/css" href="vis/dist/vis.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	
+	<input type="text" class="search" id="search" placeholder="SmartPhone" value="SmartPhone">
+	<!-- <button class="button button1" onclick="search()">GO</button> -->
+	<button class="button button1">GO</button>
+
+	<div id="graph"></div>
+	
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<h1 align="center"><font color="#c0392b">Ad</font><font color="#f1c40f">SEO</font></h1>
+		<center><p style="color: #fff;"><b>Advertise Search Engine Optimization</b></p></center>
+		<h1 align="center" style="color: #3498db;" id="suit">Suitable AdWords </h1>
+		
+	</div>
+
+	<script type="text/javascript">
+	var clusterIndex = 0;
+    var clusters = [];
+    var lastClusterZoomLevel = 0;
+    var clusterFactor = 0.9;
+
+	var data = {
+		nodes: [
+			{ id: "SmartPhone", label: "SmartPhone", group: 0,value: 250, text: ""},
+			{ id: "Brand", label: "Brand", group: 1,value: 35},
+			{ id: "Text Messaging", label: "Text Messaging", group: 1,value: 35},
+			{ id: "Voice Assistant", label: "Voice Assistant", group: 1,value: 35},
+			{ id: "Touch Screen", label: "Touch Screen", group: 1,value: 35},
+			{ id: "OS", label: "OS", group: 1,value: 20},
+			{ id: "Android", label: "Android", group: 3,value: 20},
+			{ id: "Windows", label: "Windows", group: 3,value: 20},
+			{ id: "iOS", label: "iOS", group: 3,value: 20},
+			{ id: "Samsung", label: "Samsung",group: 1,value: 10},
+			{ id: "iPhone", label: "iPhone", group: 1,value: 10},
+			{ id: "iPhone 3G", label: "iPhone 3G", group: 4,value: 1},
+			{ id: "iPhone 3GS", label: "iPhone 3GS", group: 4,value: 1},
+			{ id: "iPhone 4", label: "iPhone 4", group: 4,value: 1},
+			{ id: "iPhone 4S", label: "iPhone 4S", group: 4,value: 1},
+			{ id: "iPhone 5", label: "iPhone 5", group: 4,value: 1},
+			{ id: "iPhone 5s", label: "iPhone 5S", group: 4,value: 1},
+			{ id: "iPhone 5c", label: "iPhone 5C", group: 4,value: 1},
+			{ id: "iPhone 6", label: "iPhone 6", group: 4,value: 1},
+			{ id: "iPhone 6S", label: "iPhone 6S", group: 4,value: 1},
+			{ id: "iPhone 6 Plus", label: "iPhone 6 Plus", group: 4,value: 1},
+			{ id: "iPhone 6S Plus", label: "iPhone 6S Plus", group: 4,value: 1},
+			{ id: "HTC", label: "HTC", group: 1,value: 10},
+			{ id:"HTC U11",label:"HTC U11",group:4,value: 2},
+			{ id:"HTC U Ultra",label:"HTC U Ultra",group:4,value: 2},
+			{ id:"HTC Bolt",label:"HTC Bolt",group:4,value: 2},
+			{ id:"HTC 10",label:"HTC 10",group:4,value: 2},
+			{ id:"HTC One M9",label:"HTC One M9",group:4,value: 2},
+			{ id: "motorola", label: "motorola", group: 1,value: 10},
+			{ id:"moto g5 plus", label:"moto g5 plus", group:4,value: 2},
+			{ id:"moto z play", label:"moto z play", group:4,value: 2},
+			{ id:"moto x pure edition", label:"moto x pure edition", group:4,value: 2},
+			{ id:"moto g", label:"moto g", group:4,value: 2},
+			{ id:"Service", label:"Service", group: 2,value: 35},
+			{ id:"ATT", label:"ATT", group: 2,value: 10},
+			{ id:"Verizon", label:"Verizon", group: 2,value: 10},
+			{ id:"T-Mobile", label:"T-Mobile", group: 2,value: 10},
+			{ id:"Sprint", label:"Sprint", group: 2,value: 10},
+			{ id: "Siri", label: "Siri", group: 4,value: 15},
+			{ id: "Google Now", label: "Google Now", group: 4,value: 15},
+			{ id: "Alexa", label: "Alexa", group: 4,value: 15},
+			{ id: "Bixby", label: "Bixby", group: 4,value: 15},
+			{ id: "Cortana", label: "Cortana", group: 4,value: 15},
+			{ id: "Multi-Touch screen", label: "Multi-Touch screen", group: 2,value: 35},
+			{ id: "Gestures", label: "Gestures", group: 2,value: 35},
+			{ id: "Emojis", label: "Emojis", group: 4, value: 35},
+			{ id: "SMS", label: "SMS", group: 4,value: 35},
+			{ id: "MMS", label: "MMS", group: 4,value: 35},
+			{ id: "Videos", label: "Videos", group: 5,value: 15},
+			{ id: "Images", label: "Images", group: 5,value: 15},
+			{ id: "Email", label: "Email", group: 4,value: 15},
+			{ id: "Tele Communication", label: "Tele Communication", group: 3,value: 15},
+			{ id: "Cellular Network", label: "Cellular Network", group: 3,value: 15}
+		],
+		edges:[
+			{ from: "Brand", to:"OS"},
+			{ from: "OS", to:"Android"},
+			{ from: "OS", to:"iOS"},
+			{ from: "OS", to:"Windows"},
+			{ from: "OS", to:"Text Messaging"},
+			{ from: "OS", to:"Voice Assistant"},
+			{ from: "Service", to:"ATT"},
+			{ from: "Service", to:"Verizon"},
+			{ from: "Service", to:"T-Mobile"},
+			{ from: "Service", to:"Sprint"},
+			{ from: "Verizon", to:"Cellular Network"},
+			{ from: "ATT", to:"Cellular Network"},
+			{ from: "T-Mobile", to:"Cellular Network"},
+			{ from: "Service", to:"Tele Communication"},
+			{ from: "iOS", to:"iPhone"},
+			{ from: "Android", to:"Google Now"},
+			{ from: "Android", to:"Bixby"},
+			{ from: "Windows", to:"Cortana"},
+			{ from: "iPhone", to:"iPhone 3G"},
+			{ from: "iPhone", to:"iPhone 3GS"},
+			{ from: "iPhone", to:"iPhone 4"},
+			{ from: "iPhone", to:"iPhone 4S"},
+			{ from: "iPhone", to:"iPhone 5"},
+			{ from: "iPhone", to:"iPhone 5s"},
+			{ from: "iPhone", to:"iPhone 5c"},
+			{ from: "iPhone", to:"iPhone 6"},
+			{ from: "iPhone", to:"iPhone 6 Plus"},
+			{ from: "iPhone", to:"iPhone 6S"},
+			{ from: "iPhone", to:"iPhone 6S Plus"},
+			{ from: "Android", to:"Samsung"},
+			{ from: "Android", to:"HTC"},
+			{ from: "HTC",to:"HTC U11"},
+			{ from: "HTC",to:"HTC U Ultra"},
+			{ from: "HTC",to:"HTC Bolt"},
+			{ from: "HTC",to:"HTC 10"},
+			{ from: "HTC",to:"HTC One M9"},
+			{ from: "Android", to:"motorola"},
+			{ from:"motorola", to:"moto g5 plus"},
+			{ from:"motorola", to:"moto z play"},
+			{ from:"motorola", to:"moto x pure edition"},
+			{ from:"motorola", to:"moto g"},
+			{ from: "SmartPhone", to:"Brand", value: 20},
+			{ from: "SmartPhone", to:"Text Messaging"},
+			{ from: "SmartPhone", to:"Voice Assistant"},
+			{ from: "Voice Assistant", to:"Siri"},
+			{ from: "Voice Assistant", to:"Bixby"},
+			{ from: "Voice Assistant", to:"Cortana"},
+			{ from: "Voice Assistant", to:"Google Now"},
+			{ from: "Voice Assistant", to:"Alexa"},
+			{ from: "SmartPhone", to:"Touch Screen"},
+			{ from: "Touch Screen", to:"Multi-Touch screen"},
+			{ from: "Touch Screen", to:"Gestures"},
+			{ from:"SmartPhone", to: "Service", value: 20},
+			{ from: "Text Messaging", to:"Emojis"},
+			{ from: "Text Messaging", to:"SMS"},
+			{ from: "Text Messaging", to:"MMS"},
+			{ from: "Text Messaging", to:"Email"},
+			{ from: "MMS", to:"Images"},
+			{ from: "MMS", to:"Videos"}
+
+		],
+		options:{
+			interaction: {
+				hover: true
+			},
+			autoResize : true,
+	        nodes: {
+	            shape: 'dot',
+	            size: 30,
+	            scaling: {
+	            	label: {
+	            		min: 8,
+	            		max: 20
+	            	}
+	            },
+	            font: {
+	                size: 12,
+	                color: '#fff'
+	            },
+	            borderWidth: 2
+	        },
+	        edges: {
+	            width: 1
+	        },
+	        physics:{
+	        	adaptiveTimestep: true
+	        }
+	    }
+    };
+	
+	var container = document.getElementById("graph");
+	var network =  new vis.Network(container, data, data.options);
+
+	network.on('click', function(params){
+		params.event = "[original event]";
+		var inner = document.getElementById("suit").innerHTML;
+		console.log(params["nodes"][0], inner);
+		if (params["nodes"][0] != undefined) {
+			inner = params["nodes"][0];
+			document.getElementById("suit").innerHTML = params["nodes"][0];
+			loadData(inner);
+			document.getElementById("mySidenav").style.width = "300px";
+		} else{
+			closeNav();
+		}
+	});
+	</script>
+	
+	<script>
+		/* Set the width of the side navigation to 0 */
+		function closeNav() {
+		    document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
+	
+	<!-- CSV Table -->
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script>
+	function loadData(params) {
+		var file = params + ".csv";
+		console.log(file);
+		var tables = document.getElementsByTagName("table");
+		while (tables.length>0){
+			tables[0].parentNode.removeChild(tables[0]);
+		}
+		d3.text(file, function(data){
+			var parse = d3.csv.parseRows(data);
+			var container = d3.select("#mySidenav").append("table").selectAll("tr").data(parse).enter().append("tr").selectAll("td").data(function(d){return d;}).enter().append("td").text(function(d){return d;});
+		});
+	}
+	</script>
+</body>
+</html>
